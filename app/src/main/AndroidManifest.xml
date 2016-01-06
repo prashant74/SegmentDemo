@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.moengage.segmentdemo"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="com.moengage.demoapp.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".SegmentDemoApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="com.moe.pushlibrary.providers.MoEProvider"
+            android:authorities="com.moengage.segmentdemo.moengage.provider"
+            android:exported="false" />
+
+        <!-- MOENGAGE RECEIVER FOR RECEIVING APP UPDATE INTENT -->
+        <receiver android:name="com.moe.pushlibrary.AppUpdateReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+
+                <data
+                    android:path="com.moengage.segmentdemo"
+                    android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- MOENGAGE RECEIVER FOR RECEIVING INSTALLATION INTENT -->
+        <receiver android:name="com.moe.pushlibrary.InstallReceiver" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.moengage.worker.MoEGCMListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="com.moengage.receiver.MoEInstanceIDListener"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+
+        <!-- MANDATORY FIELD: APP ID AS SEEN ON MOENGAGE DASHBOARD APP SETTINGS PAGE -->
+        <meta-data
+            android:name="APP_ID"
+            android:value="MAZW5N1IMMSH5H67C3T9KBHB"/>
+
+        <!-- MANDATORY FIELD: SENDER ID , i.e. THE PROJECT NUMBER AS MENTIONED ON GOOGLE CLOUD CONSOLE PROJECTS PAGE -->
+        <meta-data
+            android:name="SENDER_ID"
+            android:value="id:1086695246762" />
+
+        <!-- MANDATORY FIELD: THE NOTIFICATION SMALL ICON WHICH WILL BE USED TO SET TO NOTIFICATIONS POSTED -->
+        <meta-data
+            android:name="NOTIFICATION_ICON"
+            android:value="@drawable/moe_close" />
+
+        <!-- MANDATORY FIELD: THE NOTIFICATION LARGE ICON WHICH WILL BE USED TO SET TO NOTIFICATIONS POSTED -->
+        <meta-data
+            android:name="NOTIFICATION_LARGE_ICON"
+            android:value="@drawable/abc_ic_go_search_api_mtrl_alpha" />
+
+        <meta-data
+            android:name="NOTIFICATION_TYPE"
+            android:value="@integer/notification_type_multiple" />
+
+    </application>
+
+</manifest>
