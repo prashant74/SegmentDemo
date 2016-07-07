@@ -55,8 +55,9 @@ public class MainActivity extends AppCompatActivity {
     return super.onOptionsItemSelected(item);
   }
 
-  // Method to track User Info
+  // Method to track User Attributes
   private void trackUserInfo(Context context, String age, String gender, String city) {
+    //userId is mapped to USER_ATTRIBUTE_UNIQUE_ID of MoEngage SDK
     String userId = "umang@moengage.com";
     String firstName = "Umang";
     String lastName = "Chamaria";
