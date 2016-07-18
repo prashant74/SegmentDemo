@@ -26,7 +26,7 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.google.android.gms:play-services-gcm:8.3.0'
     compile 'com.segment.analytics.android:analytics:+'
-    compile('com.segment.analytics.android.integrations:moengage:1.0.0') {
+    compile('com.moengage:moengage-segment-integration:1.0.00') {
         transitive = true
     }
 }
